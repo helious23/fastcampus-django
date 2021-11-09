@@ -62,7 +62,6 @@ def order(request):
         for food in food_list:
             order_item.order_food_lists.create(food_name=food)
         messages.success(request, "Success to order")
-
         return redirect(reverse("orders:order"))
 
     elif request.method == "GET":

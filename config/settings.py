@@ -43,6 +43,7 @@ THIRD_PARTY_APPS = ["rest_framework"]
 
 PROJECT_APPS = [
     "orders.apps.OrdersConfig",
+    "restaurants.apps.RestaurantsConfig",
 ]
 # project에서 필요한 app
 
