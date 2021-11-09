@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mx-auto grid grid-cols-3 gap-2 mt-10">
+        {% for shop in shop_list %}
+            <div class="border border-gray-300 p-10 text-center">
+                <a class="text-3xl hover:text-blue-400" href="{% url 'orders:menu' shop.pk %}">{{shop.shop_name}}</a>
+                <div>{{shop.shop_address}}</div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

@@ -39,10 +39,10 @@ DJANGO_APPS = [
 ]
 # 기존 django 에서 만들어준 app
 
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = ["rest_framework"]
 
 PROJECT_APPS = [
-    "orders.apps.CoreConfig",
+    "orders.apps.OrdersConfig",
 ]
 # project에서 필요한 app
 
@@ -128,7 +128,15 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
+STATICFILES_DIRS = [Path.joinpath(BASE_DIR, "static")]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# Static
+
+MEDIA_ROOT = Path.joinpath(BASE_DIR, "uploads")
+MEDIA_URL = "media/"
