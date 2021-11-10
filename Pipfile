@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 django = "==3.2.8"
 djangorestframework = "*"
-mysqlclient = "==2.0.3"
 pymysql = "*"
 
 [dev-packages]
