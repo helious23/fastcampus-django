@@ -1,34 +1,39 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mx-auto mt-10">
+<div class="container mx-auto mt-10 flex flex-col items-center">
+    <div class="text-3xl mb-10">Order list for {{shop.shop_name}}</div>
     <div class="grid grid-cols-3 gap-5">
         {% for order in order_list %}
             <div class="border border-gray-400 p-10">
-                <div class="text-2xl text-center mb-5">{{order.shop.shop_name}}</div>
+                <div class="flex items-center text-2xl mb-3">
+                    <ul>
+                    {% for food in order.order_food_lists.all %}
+                        <li class="mr-1 text-green-700">{{food.food_name}}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
                 <div>Order Date : {{order.order_date}}</div>
                 <div>Address : {{order.address}}</div>
-                <div class="flex items-center">
-                    <div class="mr-2">Menu : </div>
-                    {% for food in order.order_food_lists.all %}
-                        <div class="mr-1">{{food.food_name}}</div>
-                    {% endfor %}
-                </div>
+                
                 <div class="flex items-center">
                     <div class="mr-2">Estimate Time : </div>
                     {% if order.estimated_time == -1 %}
                         <div>
                             <form action="{% url 'restaurants:time_input' %}" method="POST">
+                                {% csrf_token %}
                                 <input type="number" name="estimated_time" id="" class="border border-gray-500 rounded outline-none w-20"> minutes
                                 <input type="hidden" name="order_id" value="{{order.id}}">
                                 <button class="bg-gray-400 text-white rounded p-1 text-sm">Update</button>
                             </form>
                         </div>
                     {% else %}
-                        {{order.estimated_time}} minutes
+                        <div class="text-blue-400">{{order.estimated_time}} minutes</div>
                     {% endif %}
                 </div>
-                <div>Status : {% if order.deliver_finished %}Finished{% else %}Delivering{% endif %}</div>
+                <div>Status : 
+                    <span class="text-red-400">{% if order.deliver_finished %}Finished{% else %}Delivering{% endif %}</span>
+                </div>
             </div>
         {% endfor %}
     </div>

@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mx-auto mt-10">
+<div class="container mx-auto mt-10 flex flex-col items-center">
+    <div class="text-3xl mb-10">Order List for Customer</div>
     <div class="grid grid-cols-3 gap-5">
         {% for order in order_list %}
             <div class="border border-gray-400 p-10">
+                <div class="text-center text-2xl mb-3">{{order.shop.shop_name}}</div>
                 <div>Order Date : {{order.order_date}}</div>
-                <div>Order Shop : {{order.shop.shop_name}}</div>
                 <div>Address : {{order.address}}</div>
                 <div class="flex items-center">
                     <div class="mr-2">Menu : </div>
@@ -14,7 +15,9 @@
                         <div class="mr-1">{{food.food_name}}</div>
                     {% endfor %}
                 </div>
-                <div>Estimate Time : {% if order.estimated_time == -1 %}Undefined{% else %}{{estimated_time}}{% endif %}</div>
+                <div>Estimate Time : 
+                    <span class="text-blue-500 font-medium">{% if order.estimated_time == -1 %}Undefined{% else %}{{order.estimated_time}} minutes{% endif %}</span>
+                </div>
                 <div>Status : {% if order.deliver_finished %}Finished{% else %}Delivering{% endif %}</div>
             </div>
         {% endfor %}

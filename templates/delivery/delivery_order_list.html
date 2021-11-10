@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto mt-10 flex flex-col items-center">
+    <div class="text-3xl mb-10">Order list for Delivery</div>
+    <div class="grid grid-cols-3 gap-5">
+        {% for order in order_list %}
+            <div class="border border-gray-400 p-10">
+                <div class="text-2xl text-center mb-5">{{order.shop.shop_name}}</div>
+                <div>Order Date : {{order.order_date}}</div>
+                <div>Address : {{order.address}}</div>
+                <div class="flex items-center">
+                    <div class="mr-2">Ordered Food : </div>
+                    {% for food in order.order_food_lists.all %}
+                        <div class="mr-1">{{food.food_name}}</div>
+                    {% endfor %}
+                </div>
+                <div class="flex items-center">
+                    <div class="mr-2">Estimate Time : </div>
+                    {% if order.estimated_time == -1 %}
+                        Undefined
+                    {% else %}
+                        {{order.estimated_time}} minutes
+                    {% endif %}
+                </div>
+                <div class="flex mt-1 items-center"> Status : 
+                {% if order.deliver_finished %}
+                    <div class="ml-3 text-red-500">Finished</div>
+                {% else %}
+                    <div class="ml-5">
+                        <form action="{% url 'deliveries:order_list' %}" method="POST">
+                            <input type="hidden" name="order_id" value="{{order.id}}">
+                            <button class="bg-gray-400 text-white rounded p-1 text-sm hover:bg-blue-400">Finished</button>
+                        </form>
+                    </div>
+                {% endif %}</div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

@@ -37,13 +37,13 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
-# 기존 django 에서 만들어준 app
 
 THIRD_PARTY_APPS = ["rest_framework"]
 
 PROJECT_APPS = [
     "orders.apps.OrdersConfig",
     "restaurants.apps.RestaurantsConfig",
+    "deliveries.apps.DeliveriesConfig",
 ]
 # project에서 필요한 app
 
