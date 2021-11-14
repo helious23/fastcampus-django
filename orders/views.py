@@ -6,18 +6,28 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from orders.models import OrderFoodList, Shop, Menu, Order
+from users.models import User
 from orders.serializers import MenuSerializer, ShopSerializer
 
 
 @csrf_exempt
 def shop(request):
     if request.method == "GET":
-        shops = Shop.objects.all()
-
         # serializer = ShopSerializer(shops, many=True)
         # return JsonResponse(serializer.data, safe=False)
-
-        return render(request, "order/shop_list.html", {"shop_list": shops})
+        try:
+            user_id = request.session["user_id"]
+            if user_id is not None:
+                user = User.objects.get(pk=user_id)
+                if user.user_type == User.CUSTOMER:
+                    shops = Shop.objects.all()
+                    return render(request, "order/shop_list.html", {"shop_list": shops})
+                else:
+                    messages.warning(request, "You can't access this page")
+                    return redirect("users:login")
+        except KeyError:
+            messages.warning(request, "You can't access this page")
+            return redirect("users:login")
 
     elif request.method == "POST":
         data = JSONParser().parse(request)

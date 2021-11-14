@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto mt-10">
+    <form method="POST" action="{% url 'users:login' %}">
+        <div>
+            <div class="text-3xl mb-5">Write your name</div>
+            <input type="text" name="name" required placeholder="Name" class="border border-gray-400 rounded py-2 px-5 outline-none w-96">
+        </div>
+        <button class="mt-5 bg-blue-400 py-2 px-5 rounded hover:opacity-70 text-white">Login</button>
+    </form>
+</div>
+{% endblock content %}

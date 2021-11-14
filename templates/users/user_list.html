@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mx-auto grid grid-cols-3 gap-2 mt-10">
+        {% for user in user_list %}
+            <div class="border border-gray-300 p-10 text-center">
+                <div>{{ user.user_name }}</div>
+                <div>{{ user.user_type }}</div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

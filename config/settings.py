@@ -28,7 +28,7 @@ SECRET_KEY = "django-insecure-j_fpygqup*gl(dc1#+n18cb3(u7uy2ysz(wby7z(z8+=th0!)x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -44,6 +44,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = ["rest_framework"]
 
 PROJECT_APPS = [
+    "users.apps.UsersConfig",
     "orders.apps.OrdersConfig",
     "restaurants.apps.RestaurantsConfig",
     "deliveries.apps.DeliveriesConfig",
